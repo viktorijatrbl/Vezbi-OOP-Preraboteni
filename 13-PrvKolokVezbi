@@ -1,0 +1,42 @@
+
+int main() {
+    PlaninarskiDom p; 
+
+    char imePlaninarskiDom[15], mestoZichara[30], klasa;
+    int ceni[2];
+    int dnevnakartaZichara;
+    bool daliZichara;
+    cin >> imePlaninarskiDom;
+    for (int i = 0; i < 2; i++) cin >> ceni[i];
+    cin >> klasa;
+    cin >> daliZichara;
+
+    if (daliZichara) {
+        cin >> mestoZichara >> dnevnakartaZichara;
+        PlaninarskiDom pom(imePlaninarskiDom, ceni, klasa);
+        Zichara r(mestoZichara, dnevnakartaZichara);
+        pom.setZichara(r);
+        p = pom;
+    } else {
+        PlaninarskiDom pom(imePlaninarskiDom, ceni, klasa);
+        p = pom;
+    }
+
+    p.reduceClass();
+    p.reduceClass();
+
+    int cena;
+    int den, mesec;
+    cin >> den >> mesec;
+    try {
+        p.presmetajDnevenPrestoj(den, mesec, cena); 
+        cout << "Informacii za PlaninarskiDomot:" << endl;
+        p.print();
+        if (p.isClassLessOrEqual('D'))
+            cout << "Planinarskiot dom za koj se vneseni informaciite ima klasa poniska ili ista so D\n";
+
+        cout << "Cenata za " << den << "." << mesec << " e " << cena; 
+    } catch (int) {
+        cout << "Mesecot ili denot e greshno vnesen!";
+    }
+}
