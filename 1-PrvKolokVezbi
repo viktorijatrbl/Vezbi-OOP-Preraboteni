@@ -1,0 +1,98 @@
+
+int main() {
+        int testCase;
+        cin >> testCase;
+
+        int n, minuti, kojtip;
+        char ime[50];
+
+        if (testCase == 1) {
+            cout << "===== Testiranje na klasata Pesna ======" << endl;
+            cin >> ime; 
+            cin >> minuti;
+            cin >> kojtip; 
+
+            Pesna p;
+            p.setIme(ime); 
+            p.setMinuti(minuti);
+            p.setTip((TipPesna) kojtip); 
+
+            p.pecati(); 
+        } else if (testCase == 2) {
+            cout << "===== Testiranje na klasata CD ======" << endl;
+            CD omileno;
+            omileno.setMaxMinuti(20); 
+
+            cin >> n; // Number of songs
+            for (int i = 0; i < n; i++) {
+                cin >> ime >> minuti >> kojtip; 
+
+                Pesna p;
+                p.setIme(ime);
+                p.setMinuti(minuti);
+                p.setTip((TipPesna) kojtip);
+
+                omileno.dodadiPesna(p); 
+            }
+            for (int i = 0; i < omileno.getBroj(); i++) {
+                omileno.getPesna(i).pecati(); 
+            }
+        } else if (testCase == 3) {
+            cout << "===== Testiranje na metodot dodadiPesna() od klasata CD ======" << endl;
+            CD omileno;
+            omileno.setMaxMinuti(20); 
+
+            cin >> n; // Number of songs
+            for (int i = 0; i < n; i++) {
+                cin >> ime >> minuti >> kojtip;
+
+                Pesna p;
+                p.setIme(ime);
+                p.setMinuti(minuti);
+                p.setTip((TipPesna) kojtip);
+
+                omileno.dodadiPesna(p); 
+            }
+            for (int i = 0; i < omileno.getBroj(); i++) {
+                omileno.getPesna(i).pecati();
+            }
+        } else if (testCase == 4) {
+            cout << "===== Testiranje na metodot pecatiPesniPoTip() od klasata CD ======" << endl;
+            CD omileno;
+            omileno.setMaxMinuti(20); 
+
+            cin >> n; 
+            for (int i = 0; i < n; i++) {
+                cin >> ime >> minuti >> kojtip; 
+
+                Pesna p;
+                p.setIme(ime);
+                p.setMinuti(minuti);
+                p.setTip((TipPesna) kojtip);
+
+                omileno.dodadiPesna(p); 
+            }
+            cin >> kojtip; 
+            omileno.pecatiPesniPoTip((TipPesna) kojtip);
+        } else if (testCase == 5) {
+            cout << "===== Testiranje na metodot pecatiPesniPoTip() od klasata CD ======" << endl;
+            CD omileno;
+            omileno.setMaxMinuti(20); 
+
+            cin >> n; // Number of songs
+            for (int i = 0; i < n; i++) {
+                cin >> ime >> minuti >> kojtip; 
+                
+                Pesna p;
+                p.setIme(ime);
+                p.setMinuti(minuti);
+                p.setTip((TipPesna) kojtip);
+
+                omileno.dodadiPesna(p); 
+            }
+            cin >> kojtip; 
+            omileno.pecatiPesniPoTip((TipPesna) kojtip);
+        }
+
+        return 0;
+    };
