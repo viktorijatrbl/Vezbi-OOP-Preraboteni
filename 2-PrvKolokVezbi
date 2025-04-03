@@ -35,46 +35,33 @@ List info: [испечатени информации за листата со �
 - Го враќа просекот на сите броеви во сите списоци во контејнерот.
 
 
-int main() {
-    int test;
-    cin >> test;
 
-    if (test == 1) {
-        double price;
-        cout << "=====TEST NA KLASATA StockRecord=====" << endl;
-        StockRecord sr("1", "Microsoft", 60.0, 100);
-        cout << "Konstruktor OK" << endl;
-        cin >> price;
-        sr.setNewPrice(price);
-        cout << "SET metoda OK" << endl;
-    } else if (test == 2) {
-        cout << "=====TEST NA METODITE I OPERATOR << OD KLASATA StockRecord=====" << endl;
-        char id[12], company[50];
-        double price, newPrice;
-        int n, shares;
+int main() {
+    ListContainer lc;
+    int N;
+    cin >> N;
+
+    for (int i = 0; i < N; i++) {
+        int n;
+        int niza[100];
+
         cin >> n;
-        for (int i = 0; i < n; ++i) {
-            cin >> id >> company >> price >> newPrice >> shares;
-            StockRecord sr(id, company, price, shares);
-            sr.setNewPrice(newPrice);
-            cout << sr.value() << endl;
-            sr.print();
+        for (int j = 0; j < n; j++) {
+            cin >> niza[j];
         }
-    } else if (test == 3) {
-        cout << "=====TEST NA KLASATA Client=====" << endl;
-        char companyID[12], companyName[50], clientName[50];
-        int clientID, n, shares;
-        double oldPrice, newPrice;
-        cin >> clientName >> clientID >> n;
-        Client c(clientName, clientID);
-        cout << "Konstruktor OK" << endl;
-        for (int i = 0; i < n; ++i) {
-            cin >> companyID >> companyName >> oldPrice >> newPrice >> shares;
-            StockRecord sr(companyID, companyName, oldPrice, shares);
-            sr.setNewPrice(newPrice);
-            c.addStock(sr);
-        }
-        c.printPortfolio();
+
+        List l(niza, n);
+        lc.addNewList(l);
+    }
+
+    int testCase;
+    cin >> testCase;
+
+    if (testCase == 1) {
+        lc.pecati();
+    } else {
+        cout << "Sum: " << lc.sum() << endl;
+        cout << "Average: " << lc.average() << endl;
     }
 
     return 0;
