@@ -1,3 +1,101 @@
+Имате задача да креирате модул за управување со портфолија на клиенти во приватен банкарски систем кој тргува со акции.
+> Барања за класата StockRecord
+Класата StockRecord треба да складира информации за:
+- ID на акции: Единствен идентификатор за акциите (фиксна низа од 12 знаци)
+- Име на компанија: Името на компанијата што ги издава акциите (низа од 50 знаци)
+- Набавна цена: Цената по која е купена акцијата (реален број).
+- Тековна цена: Тековната цена на акцијата (реален број).
+- Број на акции: Број на купени акции (цел број).
+
+Методи за спроведување:
+
+- Конструктор
+- Деструктор
+- setNewPrice (double price): Ја ажурира моменталната цена на акциите.
+- double value(): Ја пресметува моменталната вредност на акциите -> број на акции * моментална цена.
+- double profit(): Ја пресметува добивката од акциитe -> број на акции * (тековна цена - куповна цена).
+- print(): Ги прикажува деталите за акциите во формат: Име на компанија Број на акции Набавна цена Тековна цена Добивка
+Дополнително, вклучете статичен член за следење на вкупниот број на објекти на StockRecord и статичен метод за враќање на овој број.
+
+- Барања за класа на клиенти
+> Класата Клиент треба да складира информации за:
+- Име на клиентот: име и презиме на клиентот (низа од 50 знаци)
+- ID на сметка (цел број)
+- Портфолио на акции: низа од објекти StockRecord (фиксна големина, до 10 акции).
+- Број на акции: Го следи бројот на акции во портфолиото.
+
+Методи за спроведување:
+- Конструктор
+- Destructor
+- addStock(const StockRecord& stock): Додава нова акција во портфолиото доколку дозволува просторот (до 10 акции). 
+- totalValue(): Ја пресметува вкупната вредност на сите акции во портфолиото -> Збир на вредноста() на сите објекти на StockRecord.
+- printPortfolio(): Го прикажува портфолиото на клиентот во формат:
+  - Вкупна вредност на портфолио на ИД на сметката << endl;
+  - Име на компанија Број на акции Набавна цена Тековна цена Добивка
+
+Дополнително, користете статичен член за вкупниот број на објекти на клиентот и статичен метод за враќање на овој број.
+
+#include <cstring>
+using namespace std;
+
+class StockRecord {
+private:
+    char id[12];
+    char company[50];
+    double purchasePrice;
+    double currentPrice;
+    int numShares;
+    static int totalStockRecords;
+
+public:
+    StockRecord() { // default konstruktor ne zaboravaj za da povikash posle vo drugata klasa !!!
+        strncpy(this->id, "Unknown", 12);
+        strncpy(this->company, "Unknown", 50);
+        this->purchasePrice=0.0;
+        this->currentPrice=purchasePrice;
+        this->numShares=0;
+        totalStockRecords++;
+    }
+    // konstruktor
+    StockRecord(const char* id, const char* company, double purchasePrice, int numShares) {
+        strncpy(this->id, id, 12);
+... (129 lines left)
+Collapse
+message.txt
+10 KB
+viktorijatrbl — 31.3.2025 03:12
+cetvrta od vezbi
+#include <iostream>
+#include <cstring>
+#include <algorithm>
+using namespace std;
+
+class Patnik {
+Expand
+message.txt
+4 KB
+viktorijatrbl — 01.4.2025 19:44
+https://www.mes.org.mk/PDFs/3rd%20Congress%20Proceedings/06_Rajna%20Bogeska,%20Blagica%20Cekova,%20Biljana%20Gerasimovska.pdf
+https://prizma.mk/regionalni-deponii-istorija-na-odolzhuvane-i-na-lokalen-otpor/
+https://www.stat.gov.mk/Default.aspx
+https://www.slobodnaevropa.mk/
+https://www.moepp.gov.mk/
+https://eu.org.mk/
+https://greencivil.mk/
+https://wasteedu.eu/mk/news7.html
+https://www.moepp.gov.mk/wp-content/uploads/2014/12/План-за-затворање-на-нестандардните-депонии-во-РМ.pdf 
+Призма
+Регионални депонии: Историја на одол...
+„Зошто токму кај нас“, прашуваат локалните жители додека земјата се затрупува со отпад
+Регионални депонии: Историја на одол...
+Радио Слободна Европа
+Радио Слободна Европа
+Најнови вести, анализи, видео прилози, интервјуа, за најважните настани во Македонија и во светот.
+Посебен фокус и врз младите, нивните успеси, проблеми, размислувања низ рубриките: Моја пора...
+Image
+﻿
+flomaster
+flomaster1252
 
 int main() {
     char ime[100], destinacija[100];
