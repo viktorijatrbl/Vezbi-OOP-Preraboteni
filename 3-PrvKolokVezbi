@@ -35,88 +35,48 @@
 
 Дополнително, користете статичен член за вкупниот број на објекти на клиентот и статичен метод за враќање на овој број.
 
-#include <cstring>
-using namespace std;
-
-class StockRecord {
-private:
-    char id[12];
-    char company[50];
-    double purchasePrice;
-    double currentPrice;
-    int numShares;
-    static int totalStockRecords;
-
-public:
-    StockRecord() { // default konstruktor ne zaboravaj za da povikash posle vo drugata klasa !!!
-        strncpy(this->id, "Unknown", 12);
-        strncpy(this->company, "Unknown", 50);
-        this->purchasePrice=0.0;
-        this->currentPrice=purchasePrice;
-        this->numShares=0;
-        totalStockRecords++;
-    }
-    // konstruktor
-    StockRecord(const char* id, const char* company, double purchasePrice, int numShares) {
-        strncpy(this->id, id, 12);
-... (129 lines left)
-Collapse
-message.txt
-10 KB
-viktorijatrbl — 31.3.2025 03:12
-cetvrta od vezbi
-#include <iostream>
-#include <cstring>
-#include <algorithm>
-using namespace std;
-
-class Patnik {
-Expand
-message.txt
-4 KB
-viktorijatrbl — 01.4.2025 19:44
-https://www.mes.org.mk/PDFs/3rd%20Congress%20Proceedings/06_Rajna%20Bogeska,%20Blagica%20Cekova,%20Biljana%20Gerasimovska.pdf
-https://prizma.mk/regionalni-deponii-istorija-na-odolzhuvane-i-na-lokalen-otpor/
-https://www.stat.gov.mk/Default.aspx
-https://www.slobodnaevropa.mk/
-https://www.moepp.gov.mk/
-https://eu.org.mk/
-https://greencivil.mk/
-https://wasteedu.eu/mk/news7.html
-https://www.moepp.gov.mk/wp-content/uploads/2014/12/План-за-затворање-на-нестандардните-депонии-во-РМ.pdf 
-Призма
-Регионални депонии: Историја на одол...
-„Зошто токму кај нас“, прашуваат локалните жители додека земјата се затрупува со отпад
-Регионални депонии: Историја на одол...
-Радио Слободна Европа
-Радио Слободна Европа
-Најнови вести, анализи, видео прилози, интервјуа, за најважните настани во Македонија и во светот.
-Посебен фокус и врз младите, нивните успеси, проблеми, размислувања низ рубриките: Моја пора...
-Image
-﻿
-flomaster
-flomaster1252
 
 int main() {
-    char ime[100], destinacija[100];
-    int n;
-    bool velosiped;
-    int klasa;
-    int maxv;
+    int test;
+    cin >> test;
 
-    cin >> destinacija >> maxv;
-    cin >> n;
-
-    Voz v(destinacija, maxv);
-
-    for (int i = 0; i < n; i++) {
-        cin >> ime >> klasa >> velosiped;
-        Patnik p(ime, klasa, velosiped);
-        v.addPassenger(p);
+    if (test == 1) {
+        double price;
+        cout << "=====TEST NA KLASATA StockRecord=====" << endl;
+        StockRecord sr("1", "Microsoft", 60.0, 100);
+        cout << "Konstruktor OK" << endl;
+        cin >> price;
+        sr.setNewPrice(price);
+        cout << "SET metoda OK" << endl;
+    } else if (test == 2) {
+        cout << "=====TEST NA METODITE I OPERATOR << OD KLASATA StockRecord=====" << endl;
+        char id[12], company[50];
+        double price, newPrice;
+        int n, shares;
+        cin >> n;
+        for (int i = 0; i < n; ++i) {
+            cin >> id >> company >> price >> newPrice >> shares;
+            StockRecord sr(id, company, price, shares);
+            sr.setNewPrice(newPrice);
+            cout << sr.value() << endl;
+            sr.print();
+        }
+    } else if (test == 3) {
+        cout << "=====TEST NA KLASATA Client=====" << endl;
+        char companyID[12], companyName[50], clientName[50];
+        int clientID, n, shares;
+        double oldPrice, newPrice;
+        cin >> clientName >> clientID >> n;
+        Client c(clientName, clientID);
+        cout << "Konstruktor OK" << endl;
+        for (int i = 0; i < n; ++i) {
+            cin >> companyID >> companyName >> oldPrice >> newPrice >> shares;
+            StockRecord sr(companyID, companyName, oldPrice, shares);
+            sr.setNewPrice(newPrice);
+            c.addStock(sr);
+        }
+        c.printPortfolio();
     }
-
-    v.print();
-    v.patniciNemaMesto();
 
     return 0;
 }
